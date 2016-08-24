@@ -30,6 +30,13 @@
 ## INSTANCE METHODS
 
       #INITIALIZE METHOD
+# class User
+#   def User
+#     @name
+#   end
+#   def add_username(name)
+    #   @name = name
+    # end
 
 
 ## ATTRIBUTES
@@ -62,57 +69,64 @@
 
 #Class methods are called directly by the class and not by an instance of the class.
 
-
-
-
+# class Kitten
+#
+#   def self.say_meow
+#     return "meow"  # if we use return here instead of puts you can call other methods on it later, avoid puts in methods to avoid unintended side effects
+#   end
+#
+# end
+#
+# puts Kitten.say_meow
 
 ###################################
 ######    LETS TRY IT OUT!    #####
 ###################################
 
 
-# class Pawn
-#   attr_reader :position
-#   def initialize(position)
-#     @position = position
-#   end
-#
-#   # This is the class method, it starts with self.
-#   # It is only called on the class directly Pawn.make_row
-#   def self.make_row(side)
-#     if side == "white"
-#       num = 2
-#     else
-#       num = 7
-#     end
-#
-#     pawns = []
-#     ("a".."h").each do |letter|
-#       pawns << self.new("#{letter}#{num}")
-#     end
-#
-#     pawns
-#   end
-# end
-#
-# #make one pawn
-# one_pawn = Pawn.new("A2")
-#
-# #make a whole row of pawns
+class Pawn
+  attr_reader :position
+  def initialize(position)
+    @position = position
+  end
+
+  # This is the class method, it starts with self.
+  # It is only called on the class directly Pawn.make_row
+  def self.make_row(side)
+    if side == "white"
+      num = 2
+    else
+      num = 7
+    end
+
+    pawns = []
+    ("a".."h").each do |letter|
+      pawns << self.new("#{letter}#{num}") # making a new object of itself within itself "spawning itself"  and puting a new object of pawn into the array
+    end
+
+    pawns
+  end
+end
+
+#make one pawn
+one_pawn = Pawn.new("A2")
+# one_pawn.make_row("purple") can't do that because the .make_row method can only be called on the class pawn not an instance of the pawn object. 
+
+#make a whole row of pawns
 # pawns = Pawn.make_row("black")
 #
 # #What is being stored in this local variable pawns?
 # print pawns
-#
-# #WHAT IS THIS DOING!?
-# puts pawns.shuffle.first.position
+
+#WHAT IS THIS DOING!?
+# puts pawns.shuffle.first.position # take the array of pawns, shuffle is up, tell what the possition of the first pawn in the shuffled array.
 
 
 
 ###################################
 ######   WHERE IS THIS USED?  #####
 ###################################
-#Class methods are for anything that does not deal with an individual instance of a class
+#Class methods are for anything that does not deal with an individual instance of a class, when all instances of a class might need a specific attribute or action
 
 
 #In Gems, like faker
